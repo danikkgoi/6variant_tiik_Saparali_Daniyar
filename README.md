@@ -1,0 +1,1 @@
+# 6variant_tiik_Saparali_Daniyar
