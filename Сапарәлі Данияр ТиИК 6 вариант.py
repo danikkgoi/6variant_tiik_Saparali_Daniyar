@@ -18,7 +18,6 @@ def satisfies_fano(code: dict) -> bool:
     words = list(code.values())
     return not any(a != b and b.startswith(a) for a in words for b in words)
 
-
 def decode_prefix(message: str, code: dict) -> str:
     inverse = {v: k for k, v in code.items()}
     result, buf, parts = [], "", []
@@ -29,7 +28,7 @@ def decode_prefix(message: str, code: dict) -> str:
             parts.append(buf)
             buf = ""
     if buf:
-        raise ValueError(f"Декодталмай қалған қалдық: {buf}")
+        raise ValueError("Декодталмай қалған қалдық: {buf}")
     return "".join(result), parts
 
 
@@ -41,7 +40,7 @@ def seminar_8():
     print(f"1-есеп. N = {N_ALPHABET}")
     print(f"  2^{k-1} = {2**(k-1)} < {N_ALPHABET} <= 2^{k} = {2**k}")
     print(f"  Жауап: k = {k} бит")
-    print(f"\n2-есеп. Код: {PREFIX_CODE}")
+    print(f"2-есеп. Код: {PREFIX_CODE}")
     print(f"  Фано шарты орындала ма? -> {satisfies_fano(PREFIX_CODE)}")
     decoded, parts = decode_prefix(MESSAGE, PREFIX_CODE)
     print(f"  Хабар: {MESSAGE}")
@@ -68,7 +67,7 @@ def hamming_encode(info: str, verbose: bool = True) -> str:
     n_k = check_bits_count(n_i)
     n = n_i + n_k
     ctrl = [2 ** i for i in range(n_k)]
-    a = [None] * (n + 1)          # a[1..n]
+    a = [None] * (n + 1)
     it = iter(info)
     for pos in range(1, n + 1):
         if not is_power_of_two(pos):
@@ -117,14 +116,14 @@ def flip(word: str, pos: int) -> str:
 
 
 def seminar_9():
-    print("\n" + "=" * 60)
+    print("n" + "=" * 60)
     print("Кедергіге төзімді кодтау. Хэмминг коды")
     print("=" * 60)
-    print(f"1-есеп. Ақпараттық комбинация: {INFO_BITS}")
+    print("1-есеп. Ақпараттық комбинация: {INFO_BITS}")
     C = hamming_encode(INFO_BITS)
     print(f"  Жауап: C = {C}")
 
-    print(f"\n2-есеп. {ERROR_POSITION}-разряд бұрмаланды")
+    print("2-есеп. {ERROR_POSITION}-разряд бұрмаланды")
     C_err = flip(C, ERROR_POSITION)
     print(f"  C* = {C_err}")
     s = hamming_syndrome(C_err)
